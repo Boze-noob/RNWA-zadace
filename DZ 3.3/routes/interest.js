@@ -1,14 +1,14 @@
 import express from "express";
-const router = express.Router();
+var interestRouter = express.Router();
 
 import { interestController } from "../controllers";
 
-router.get("/api/interest", interestController.get);
+interestRouter.get("/api/interest", interestController.get);
 
-router.post("/api/interest", interestController.create);
+interestRouter.post("/api/interest", interestController.create);
 
-router.put("/api/interest/:_id", interestController.update);
+interestRouter.put("/api/interest/:_id", interestController.update);
 
-router.delete("/api/interest/:_id", interestController.delete);
+interestRouter.delete("/api/interest/:_id", interestController.delete);
 
-export default router;
+module.exports = interestRouter;

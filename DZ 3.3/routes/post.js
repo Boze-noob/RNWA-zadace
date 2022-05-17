@@ -1,14 +1,14 @@
-import express from "express";
-const router = express.Router();
+var express = require('express');
+var postRouter = express.Router();
 
-import { postsController } from "../controllers";
+import { controller } from "./controllers";
 
-router.get("/api/posts", postsController.get);
+postRouter.get("/api/posts", controller.PostController.get);
 
-router.post("/api/posts", postsController.create);
+postRouter.post("/api/posts", controller.PostController.create);
 
-router.put("/api/posts/:_id", postsController.update);
+postRouter.put("/api/posts/:_id", controller.PostController.update);
 
-router.delete("/api/posts/:_id", postsController.delete);
+postRouter.delete("/api/posts/:_id", controller.PostController.delete);
 
-export default router;
+module.exports = postRouter;
