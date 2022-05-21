@@ -30,7 +30,6 @@ exports.create = (req, res) => {
 // Retrieve all Posts from the database (with condition).
 exports.findAll = (req, res) => {
   const title = ' ';
-  console.log("we are in post controller");
   Post.getAll(title, (err, data) => {
     if (err)
       res.status(500).send({

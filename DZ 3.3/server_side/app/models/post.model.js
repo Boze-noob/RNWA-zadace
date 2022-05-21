@@ -40,7 +40,6 @@ Post.findById = (pid, result) => {
 };
 
 Post.getAll = (pid, result) => {
-  console.log("we are in post model");
   let query = "SELECT * FROM post";
 
   sql.query(query, (err, res) => {
