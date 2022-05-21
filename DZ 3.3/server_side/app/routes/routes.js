@@ -8,14 +8,15 @@ module.exports = app => {
   var router = require("express").Router();
   
   router.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
   });
 
   router.get("/posts", posts.findAll);
 
-  router.get("/posts/:id", posts.findOne);
+  router.get("/post/:id", posts.findOne);
   
   router.post("/post", posts.create);
 

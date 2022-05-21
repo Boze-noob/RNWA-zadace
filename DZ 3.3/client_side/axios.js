@@ -43,3 +43,32 @@ const getAllInterests = () => {
       console.log(error);
     });
   };
+
+
+  const addPostBtn = document.getElementById('add_post_btn');
+
+const postPost = () => {
+  var pcontent = document.getElementById('create_post_content').value;
+  var rid = document.getElementById('create_post_rid').value;
+
+  const headers = {
+    'Content-Type': 'application/json'
+};
+var currentdate = new Date(); 
+    axios.post('http://localhost:5000/api/post', {
+    pcontent : pcontent,
+    rid : rid,
+    time : currentdate,
+    },
+    {headers}
+    ).then(
+      function(response){
+        console.log('action response');
+        console.log(response);
+      }
+    ).catch(function(error){
+      console.log(error);
+    });
+  }
+
+  addPostBtn.addEventListener('click', postPost);
