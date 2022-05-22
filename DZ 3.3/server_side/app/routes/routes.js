@@ -1,9 +1,9 @@
 module.exports = app => {
 
 
-  const interest = require("../controllers/interest.controller.js"); 
+  const interestController = require("../controllers/interest.controller.js"); 
 
-  const posts = require("../controllers/post.controller.js");
+  const postController = require("../controllers/post.controller.js");
 
   var router = require("express").Router();
   
@@ -14,31 +14,31 @@ module.exports = app => {
     next();
   });
 
-  router.get("/posts", posts.findAll);
+  router.get("/posts", postController.findAll);
 
-  router.get("/post/:id", posts.findOne);
+  router.get("/post/:id", postController.findOne);
   
-  router.post("/post", posts.create);
+  router.post("/post", postController.create);
 
-  router.put("/post/:id", posts.update);
+  router.put("/post/:id", postController.update);
 
-  router.delete("/post/:id", posts.delete);
+  router.delete("/post/:id", postController.delete);
 
-  router.delete("/posts", posts.deleteAll);
+  router.delete("/posts", postController.deleteAll);
 
 
 
-  router.get("/interests", interest.findAll);
+  router.get("/interests", interestController.findAll);
 
-  router.get("/interest/:id", interest.findOne);
+  router.get("/interest/:id", interestController.findOne);
   
-  router.post("/interest", interest.create);
+  router.post("/interest", interestController.create);
 
-  router.put("/interest/:id", interest.update);
+  router.put("/interest/:id", interestController.update);
 
-  router.delete("/interest/:id", interest.delete);
+  router.delete("/interest/:id", interestController.delete);
 
-  router.delete("/interest", interest.deleteAll);
+  router.delete("/interest", interestController.deleteAll);
 
 
   app.use('/api', router);

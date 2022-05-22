@@ -27,7 +27,7 @@ exports.create = (req, res) => {
   });
 };
 
-// Retrieve all Posts from the database (with condition).
+// Retrieve all Posts from the database
 exports.findAll = (req, res) => {
   const title = ' ';
   Post.getAll(title, (err, data) => {

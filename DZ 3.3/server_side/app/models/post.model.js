@@ -56,7 +56,7 @@ Post.getAll = (pid, result) => {
 
 Post.updateById = (pid, post, result) => {
   sql.query(
-    "UPDATE post SET pcontent = ?, rid = ?, description = ? WHERE pid = ?",
+    "UPDATE post SET pcontent = ?, rid = ?, time = ? WHERE pid = ?",
     [post.pcontent, post.rid, post.time, pid],
     (err, res) => {
       if (err) {
