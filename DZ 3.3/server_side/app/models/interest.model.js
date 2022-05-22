@@ -80,7 +80,6 @@ Interest.updateById = (intid, Interest, result) => {
 Interest.remove = (intid, result) => {
   sql.query("DELETE FROM interest WHERE intid = ?", intid, (err, res) => {
     if (err) {
-      console.log("error: ", err);
       result(null, err);
       return;
     }
