@@ -42,7 +42,7 @@ exports.findAll = (req, res) => {
 
 // Find a single Interest by Id
 exports.findOne = (req, res) => {
-  Interest.findById(req.params.intid, (err, data) => {
+  Interest.findById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -69,7 +69,7 @@ exports.update = (req, res) => {
   console.log(req.body);
 
   Interest.updateById(
-    req.params.intid,
+    req.params.id,
     new Interest(req.body),
     (err, data) => {
       if (err) {
@@ -89,15 +89,15 @@ exports.update = (req, res) => {
 
 // Delete a Interest with the specified id in the request
 exports.delete = (req, res) => {
-  Interest.remove(req.params.intid, (err, data) => {
+  Interest.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Interest with id ${req.params.intid}.`
+          message: `Not found Interest with id ${req.params.id}.`
         });
       } else {
         res.status(500).send({
-          message: "Could not delete Interest with id " + req.params.intid
+          message: "Could not delete Interest with id " + req.params.id
         });
       }
     } else res.send({ message: `Interest was deleted successfully!` });

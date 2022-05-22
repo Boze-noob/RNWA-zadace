@@ -1,3 +1,5 @@
+const addPostBtn = document.getElementById('add_post_btn');
+const addInterestBtn = document.getElementById('add_interest_btn');
 
 const headers = {
   'Content-Type': 'application/json'
@@ -39,7 +41,6 @@ const getAllInterests = () => {
   };
 
 
-  const addPostBtn = document.getElementById('add_post_btn');
 
 const postPost = () => {
   var pcontent = document.getElementById('create_post_content').value;
@@ -68,6 +69,34 @@ var post = {
       console.log(error);
     });
   }
+
+
+  const postInterest = () => {
+    var interest = document.getElementById('create_interest_interest').value;
+    var rid = document.getElementById('create_interest_rid').value;
+  
+    const headers = {
+      'Content-Type': 'application/json'
+  };
+  
+  var interest = {
+    interest : interest,
+    rid: rid,
+  }
+      axios.post('http://localhost:5000/api/interest', interest,
+      {headers}
+      ).then(
+        function(response){
+          var tr = addNewRowPostTable(response.data.newInterest);
+          table.appendChild(tr);
+          console.log(response);
+        }
+      ).catch(function(error){
+        console.log(error);
+      });
+    }
+
+
 
   function addNewRowInterestTable(object){
     var tr = document.createElement('tr');
@@ -107,7 +136,6 @@ var post = {
   }
 
   function onPostEdit(td){
-    console.log('on post edit');
     selectedRow = td.parentElement;
     var pid = selectedRow.cells[0].innerHTML;
     
@@ -128,4 +156,41 @@ console.log(error);
     });
   }
 
+  function onDeleteInterest(td){
+    selectedRow = td.parentElement;
+    var intid = selectedRow.cells[0].innerHTML;
+
+    axios.delete('http://localhost:5000/api/interest/' + intid,
+    {headers}
+    ).then(
+      function(response){
+        document.getElementById("interestsTable").deleteRow(selectedRow.rowIndex);
+        resetForm();
+      }
+    ).catch(function(error){
+      console.log(error);
+    });
+  }
+
+  function onInterestEdit(td){
+    selectedRow = td.parentElement;
+    var intid = selectedRow.cells[0].innerHTML;
+    
+    var interest = {
+      interest : selectedRow.cells[1].innerHTML,
+      rid: selectedRow.cells[2].innerHTML,
+    }
+
+    axios.put('http://localhost:5000/api/interest/' + intid, interest,
+    {headers}
+    ).then(
+      function(response){
+        console.log(response);
+      }
+    ).catch(function(error){
+console.log(error);
+    });
+  }
+
   addPostBtn.addEventListener('click', postPost);
+  addInterestBtn.addEventListener('click', postInterest);
