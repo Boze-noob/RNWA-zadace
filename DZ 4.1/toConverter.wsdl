@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<definitions name="HelloWorld" targetNamespace="urn:HelloWorld" xmlns:tns="urn:HelloWorld"  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+    <types>
+        <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Test">
+            <xsd:element name="dataType" type="xsd:integer" />
+            <xsd:element name="ConvertResponse" type="xsd:string" />
+        </xsd:schema>
+    </types>
+
+    <message name="Convert">
+        <part name="yourValue" type="tns:dataType" />
+        <part name="convertType" type="tns:dataType" />
+    </message>
+
+    <message name="ConvertResponse">
+        <part name="return" type="tns:dataType" />
+    </message>
+
+    <portType name="ConvertPort">
+        <operation name="Convert">
+            <input message="tns:Convert" />
+            <output message="tns:ConvertResponse" />
+        </operation>
+    </portType>
+
+    <binding name="bind" type="tns:ConvertPort">
+        <operation name="Convert">
+            <soap:operation soapAction="urn:ConvertAction" />
+            <input>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+    </binding>
+
+
+
+    <service name="Service">
+        <port name="ConvertPort" binding="tns:bind">
+            <soap:address location="http://rnwa/RNWA-zadace/DZ%204.1/converter.php"/>
+        </port>
+    </service>
+
+</definitions>
