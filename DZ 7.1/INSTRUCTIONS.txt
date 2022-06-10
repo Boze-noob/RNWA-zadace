@@ -1,0 +1,15 @@
+1. Pingamo POST http://localhost:5000/api/login kako bi dobili token i refresh token. Vrijeme trajanja tokena je 10 min. 
+Body: 
+{
+   "username": "Boke"
+}
+Kako bi sebi olakšao riješavanje ove zadaće, postavio sam da za username možemo upisati bilo koje ime, inače bi provjeravali posoji li username u bazi i tek onda bi vraćali token etc.
+
+2. Pingamo GET http://localhost:5000/api/posts
+Header: key = Authorization value = Bearer + token koji smo dobili iz koraka 1.
+
+3. Nakon što nam istekne token, pingamo POST http://localhost:5000/api/token 
+Body : 
+{
+    "token": refresh token koji smo dobili u koraku 1.
+}
