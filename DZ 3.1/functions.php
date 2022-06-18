@@ -23,11 +23,13 @@ function insert_employee()
 		global $connection;
 
 		$data = json_decode(file_get_contents('php://input'), true);
+		//auto-increment is not enabled for this field in database
+		$employee_no = $data["emp_no"];
 		$employee_bdate		=$data["birth_date"];
 		$employee_fname		=$data["first_name"];
 		$employee_lname		=$data["last_name"];
 		$employee_gender		=$data["gender"];
-		$query="INSERT INTO employees VALUES (NULL,'".$employee_bdate."','".$employee_fname."','".$employee_lname."','".$employee_gender."',DATE(NOW()))";
+		$query="INSERT INTO employees VALUES ('".$employee_no."','".$employee_bdate."','".$employee_fname."','".$employee_lname."','".$employee_gender."',DATE(NOW()))";
 		
 		
 		if(mysqli_query($connection, $query))
