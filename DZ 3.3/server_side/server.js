@@ -1,10 +1,6 @@
 const express = require("express");
 // const bodyParser = require("body-parser"); /* deprecated */
-
-
 const app = express();
-
-
 
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */

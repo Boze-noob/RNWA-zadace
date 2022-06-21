@@ -12,45 +12,25 @@ if (extension_loaded('soap')) {
 
         $selectedCurrency = $_POST['currency'];
 
-        if ($_POST['currency'] === "eurToBam") {
-            $sClient = new SoapClient('toConverter.wsdl',array(
-                'trace' => true,
-                'keep_alive' => true,
-                'connection_timeout' => 5000,
-                'cache_wsdl' => WSDL_CACHE_NONE,
-                'compression'   => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
-            ));
+        $sClient = new SoapClient('toConverter.wsdl',array(
+            'trace' => true,
+            'keep_alive' => true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'compression'   => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+        ));
+
+        if ($selectedCurrency === "eurToBam") {
             $response = $sClient->Convert($value, 'eurToBam');
         } 
-        else if($_POST['currency'] === "bamToEur"){
-            $sClient = new SoapClient('toConverter.wsdl',array(
-                'trace' => true,
-                'keep_alive' => true,
-                'connection_timeout' => 5000,
-                'cache_wsdl' => WSDL_CACHE_NONE,
-                'compression'   => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
-            ));
+        else if($selectedCurrency === "bamToEur"){
             $response = $sClient->Convert($value, 'bamToEur');
         }
-        else if($_POST['currency'] === "bamToUsd"){
-            $sClient = new SoapClient('toConverter.wsdl',array(
-                'trace' => true,
-                'keep_alive' => true,
-                'connection_timeout' => 5000,
-                'cache_wsdl' => WSDL_CACHE_NONE,
-                'compression'   => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
-            ));
+        else if($selectedCurrency === "bamToUsd"){
             $response = $sClient->Convert($value, 'bamToUsd');
         }
         //USD to Bam
         else {
-            $sClient = new SoapClient('toConverter.wsdl',array(
-                'trace' => true,
-                'keep_alive' => true,
-                'connection_timeout' => 5000,
-                'cache_wsdl' => WSDL_CACHE_NONE,
-                'compression'   => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
-            ));
             $response = $sClient->Convert($value, 'usdToBam');
         }
         var_dump($response);
