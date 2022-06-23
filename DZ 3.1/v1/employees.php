@@ -33,6 +33,9 @@
 				$id=intval($_GET["id"]);
 				update_employee($id);				
 			}
+			else if(empty($_GET["id"])){
+				echo json_encode("Param is not provided");
+			}
 			else{
 				header('Content-Type: application/json');
 				echo json_encode("Error while calling method and parametars");
@@ -41,6 +44,11 @@
 			
 			break;				
 			case 'DELETE':
+				if(empty($_GET["id"])){
+					echo json_encode("Param is not provided");
+					break;
+				}
+				
 			// Delete Product
 			$id=intval($_GET["id"]);
 			delete_employee($id);
