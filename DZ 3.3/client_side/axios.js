@@ -14,7 +14,7 @@ const getAllPosts = () => {
   table.appendChild(colDesc);
 
   dataArray.forEach(function(object) {
-    var tr = addNewRowPostTable(object);
+    var tr = addNewRowPostTable(object, object.pid);
     table.appendChild(tr);
 });          
   }) .catch(function (error) {
@@ -31,7 +31,7 @@ const getAllInterests = () => {
       table.appendChild(colDesc);
     
       dataArray.forEach(function(object) {
-        var tr = addNewRowInterestTable(object);
+        var tr = addNewRowInterestTable(object, object.intid);
         table.appendChild(tr);
     }); 
     
@@ -61,7 +61,7 @@ var post = {
     {headers}
     ).then(
       function(response){
-        var tr = addNewRowPostTable(response.data);
+        var tr = addNewRowPostTable(response.data.newPost, response.data.newPostId);
         table.appendChild(tr);
         console.log(response);
       }
@@ -74,6 +74,7 @@ var post = {
   const postInterest = () => {
     var interest = document.getElementById('create_interest_interest').value;
     var rid = document.getElementById('create_interest_rid').value;
+    var table = document.getElementById('interestsTable');
   
     const headers = {
       'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ var post = {
       {headers}
       ).then(
         function(response){
-          var tr = addNewRowInterestTable(response.data.newInterest);
+          var tr = addNewRowInterestTable(response.data.newInterest, response.data.newInterestId);
           table.appendChild(tr);
           console.log(response);
         }
@@ -98,9 +99,9 @@ var post = {
 
 
 
-  function addNewRowInterestTable(object){
+  function addNewRowInterestTable(object, id){
     var tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + object.intid + '</td>' +
+    tr.innerHTML = '<td>' + id + '</td>' +
     '<td contenteditable="true">' + object.interest + '</td>' +
     '<td contenteditable="true">' + object.rid + '</td>' +
     `<a onClick="onInterestEdit(this)"> Izmjeni </a>
@@ -108,12 +109,12 @@ var post = {
     return tr;
   }
 
-  function addNewRowPostTable(object){
+  function addNewRowPostTable(object, id){
     var tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + object.newPostId + '</td>' +
-    '<td contenteditable="true">' + object.newPost.pcontent + '</td>' +
-    '<td contenteditable="true">' + object.newPost.rid + '</td>' +
-    '<td contenteditable="true">' + object.newPost.time + '</td>' +
+    tr.innerHTML = '<td>' + id + '</td>' +
+    '<td contenteditable="true">' + object.pcontent + '</td>' +
+    '<td contenteditable="true">' + object.rid + '</td>' +
+    '<td contenteditable="true">' + object.time + '</td>' +
     `<a onClick="onPostEdit(this)"> Izmjeni </a>
                        <a onClick="onDeletePost(this)"> Izbrisi </a>`;
                        return tr;

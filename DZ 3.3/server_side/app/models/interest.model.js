@@ -15,7 +15,8 @@ Interest.create = (newInterest, result) => {
     }
 
     console.log("created interest: ", {newInterest });
-    result(null, {newInterest });
+    let newInterestId = res.insertId;
+    result(null, {newInterest, newInterestId });
   });
 };
 
@@ -39,7 +40,6 @@ Interest.findById = (intid, result) => {
 };
 
 Interest.getAll = (intid, result) => {
-  console.log("we are in Interest model");
   let query = "SELECT * FROM interest";
 
   sql.query(query, (err, res) => {

@@ -29,7 +29,6 @@ exports.create = (req, res) => {
 // Retrieve all Interests from the database (with condition).
 exports.findAll = (req, res) => {
   const title = ' ';
-  console.log("we are in Interest controller");
   Interest.getAll(title, (err, data) => {
     if (err)
       res.status(500).send({
