@@ -61,7 +61,7 @@ var post = {
     {headers}
     ).then(
       function(response){
-        var tr = addNewRowPostTable(response.data.newPost);
+        var tr = addNewRowPostTable(response.data);
         table.appendChild(tr);
         console.log(response);
       }
@@ -87,7 +87,7 @@ var post = {
       {headers}
       ).then(
         function(response){
-          var tr = addNewRowPostTable(response.data.newInterest);
+          var tr = addNewRowInterestTable(response.data.newInterest);
           table.appendChild(tr);
           console.log(response);
         }
@@ -110,10 +110,10 @@ var post = {
 
   function addNewRowPostTable(object){
     var tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + object.pid + '</td>' +
-    '<td contenteditable="true">' + object.pcontent + '</td>' +
-    '<td contenteditable="true">' + object.rid + '</td>' +
-    '<td contenteditable="true">' + object.time + '</td>' +
+    tr.innerHTML = '<td>' + object.newPostId + '</td>' +
+    '<td contenteditable="true">' + object.newPost.pcontent + '</td>' +
+    '<td contenteditable="true">' + object.newPost.rid + '</td>' +
+    '<td contenteditable="true">' + object.newPost.time + '</td>' +
     `<a onClick="onPostEdit(this)"> Izmjeni </a>
                        <a onClick="onDeletePost(this)"> Izbrisi </a>`;
                        return tr;

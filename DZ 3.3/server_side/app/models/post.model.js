@@ -14,9 +14,10 @@ Post.create = (newPost, result) => {
       result(err, null);
       return;
     }
-
+    
     console.log("created post: ", {newPost });
-    result(null, {newPost });
+    let newPostId = res.insertId;
+    result(null, {newPost, newPostId});
   });
 };
 
