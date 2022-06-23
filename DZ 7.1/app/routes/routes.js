@@ -85,7 +85,7 @@ module.exports = app => {
   })
   
   function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' })
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '90s' })
   }
 
   app.use('/api', router);
