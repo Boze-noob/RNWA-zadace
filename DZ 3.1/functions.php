@@ -100,7 +100,7 @@ function update_employee($id)
 					'status' => 0,
 					'query' => $query,
 					'broj_redaka' => $broj_redaka,
-					'status_message' =>'No data found with id: ' .$id
+					'status_message' =>'No rows affected'
 				);
 			}
 			

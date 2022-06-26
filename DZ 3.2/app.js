@@ -30,12 +30,15 @@ app.get('/employees', (req, res) => {
 
         connection.query('SELECT * FROM employees LIMIT 10', (err, rows) => {
             connection.release() // return the connection to pool
-
-            if(!err) {
-                res.send(rows)
-            } else 
-            {
-                console.log(err)
+            if(rows.length === 0){
+                res.send("No data found")
+            } else {
+                if(!err) {
+                    res.send(rows)
+                } else 
+                {
+                    console.log(err)
+                }
             }
         })
     })
@@ -50,12 +53,15 @@ app.get('/employees/:id', (req, res) => {
 
         connection.query('SELECT * FROM employees WHERE emp_no = ?', [req.params.id], (err, rows) => {
             connection.release() // return the connection to pool
-
-            if(!err) {
-                res.send(rows)
-            } else 
-            {
-                console.log(err)
+            if(rows.length === 0){
+                res.send("No data found")
+            } else {
+                if(!err) {
+                    res.send(rows)
+                } else 
+                {
+                    console.log(err)
+                }
             }
         })
     })
@@ -90,14 +96,18 @@ app.put('/employees', (req, res) => {
 
         const { emp_no, birth_date, first_name, last_name, gender, hire_date } = req.body
         console.log(req.body)
+        
         connection.query('UPDATE employees SET birth_date = ?, first_name = ?, last_name = ?, gender = ?, hire_date = ? WHERE emp_no = ?', [birth_date, first_name, last_name, gender, hire_date, emp_no], (err, rows) => {
             connection.release() // return the connection to pool
-
-            if(!err) {
-                res.send(`Zaposlenik s ID-em ${emp_no} uspješno ažuriran.`)
-            } else 
-            {
-                console.log(err)
+            if(rows.affectedRows === 0){
+                res.send("No rows affected")
+            } else {
+                if(!err) {
+                    res.send(`Zaposlenik s ID-em ${emp_no} uspješno ažuriran.`)
+                } else 
+                {
+                    console.log(err)
+                }
             }
         })
     })
