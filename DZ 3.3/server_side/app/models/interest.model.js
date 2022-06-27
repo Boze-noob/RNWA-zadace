@@ -34,7 +34,6 @@ Interest.findById = (intid, result) => {
       return;
     }
 
-    // not found Tutorial with the id
     result({ kind: "not_found" }, null);
   });
 };
@@ -45,7 +44,7 @@ Interest.getAll = (intid, result) => {
   sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(null, err);
+      result(err, null);
       return;
     }
 
@@ -61,12 +60,11 @@ Interest.updateById = (intid, Interest, result) => {
     (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err, null);
         return;
       }
 
       if (res.affectedRows == 0) {
-        // not found Tutorial with the id
         result({ kind: "not_found" }, null);
         return;
       }
@@ -80,12 +78,11 @@ Interest.updateById = (intid, Interest, result) => {
 Interest.remove = (intid, result) => {
   sql.query("DELETE FROM interest WHERE intid = ?", intid, (err, res) => {
     if (err) {
-      result(null, err);
+      result(err, null);
       return;
     }
 
     if (res.affectedRows == 0) {
-      // not found Tutorial with the id
       result({ kind: "not_found" }, null);
       return;
     }
@@ -99,7 +96,7 @@ Interest.removeAll = result => {
   sql.query("DELETE FROM interest", (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(null, err);
+      result(err, null);
       return;
     }
 

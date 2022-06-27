@@ -35,7 +35,6 @@ Post.findById = (pid, result) => {
       return;
     }
 
-    // not found Tutorial with the id
     result({ kind: "not_found" }, null);
   });
 };
@@ -62,7 +61,7 @@ Post.updateById = (pid, post, result) => {
     (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err, null);
         return;
       }
 
